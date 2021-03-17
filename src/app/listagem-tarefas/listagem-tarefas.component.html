@@ -7,18 +7,71 @@
         </div>
 
         <div class="ui-g-12" style="margin-top: 20px;">
-            <label>Numero:</label>
+            <label>Número:</label>
             <br>
             <input type="text" pInputText style="width: 30%;">
         </div>
 
-        <br>
 
         <div class="ui-g-12" style="margin-top: 20px;">
-            <label >Titulo/Descrição:</label>
+            <label>Título/Descrição:</label>
             <br>
-            <input type="text" pInputText style="width: 70%;">
+            <input type="text" pInputText style="width: 81.3%;">
         </div>
+        <br>
+
+        <div class="p-grid">
+
+            <div class="p-col">
+                <label style="margin-right: 20px;">Responsavel:</label>
+                <input type="text" pInputText style="width: 45%;">
+            </div>
+
+            <div class="p-col">
+                <label style="margin-right: 20px;">Situação:</label>
+                <p-dropdown [options]="responsaveis" [(ngModel)]="select" optionLabel="name" style="width: 45%;">
+                </p-dropdown>
+            </div>
+
+            <div class="p-col">
+                <button pButton type="button" label="Pesquisar Tarefas"></button>
+            </div>
+
+        </div>
+
+        <p-table [value]="tarefas" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="3" [responsive]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="col-lista">Numero</th>
+                    <th class="col-lista">titulo</th>
+                    <th class="col-tarefa">Responsavel</th>
+                    <th class="col-tarefa">Ações</th>
+
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-tarefa>
+                <tr>
+                    <td class="col-tarefa">{{ tarefa.numero }}</td>
+                    <td class="col-tarefa">{{ tarefa.titulo }}</td>
+                    <td class="col-tarefa">{{ tarefa.responsavel }}</td>
+                    <td class="col-tarefa">
+                        <a pButton icon="pi pi-pencil" class="aButton" pTooltip="Editar" tooltipPosition="top"></a>
+                        <button pButton icon="pi pi-trash" class="aButton" pTooltip="Excluir"
+                            tooltipPosition="top"></button>
+                        <button pButton icon="pi pi-check" class="aButton" pTooltip="Concluir"
+                            tooltipPosition="top"></button>
+                    </td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <div class="ui-g-12">
+
+        <a pButton label="Nova Tarefa"></a>
 
     </div>
 
