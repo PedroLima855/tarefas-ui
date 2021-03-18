@@ -15,7 +15,54 @@
         <div class="ui-g-12" style="margin-top: 20px;">
             <label>Descrição:</label>
             <br>
-            <textarea type="text" pInputTextarea style="width: 80%;" ></textarea>
+            <textarea rows="5" cols="89" pInputTextarea></textarea>
+        </div>
+
+        <br>
+
+        <div class="p-grid">
+
+            <div class="p-col">
+                <label style="margin-right: 20px;">Responsavel:</label>
+                <input type="text" pInputText style="width: 48.5%;">
+            </div>
+
+            <div class="p-col">
+               <label style="margin-right: 20px;">Prioridade:</label>
+               <p-dropdown [options]="prioridades" [(ngModel)]="select" optionLabel="name"></p-dropdown>
+            </div>
+
+            <div class="p-col">
+            </div>
+
+        </div>
+
+        <br>
+
+        <div>
+            <label style="margin-right: 20px;">Deadine:</label>
+            <input matInput mask="00/00/0000"/>
+        </div>
+
+        <br>
+        
+        <div class="ui-g-12">
+
+            <a pButton label="Cadastrar" style="width: 30%; margin-left: 325px;"></a>
+    
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="ui-g-12">
+
+            <a pButton label="Buscar Tarefas"></a>
+    
         </div>
 
 

@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Prioridade } from './Prioridade';
+
 
 @Component({
   selector: 'app-cadastrar-tarefa',
   templateUrl: './cadastrar-tarefa.component.html',
   styleUrls: ['./cadastrar-tarefa.component.css']
 })
-export class CadastrarTarefaComponent implements OnInit {
+export class CadastrarTarefaComponent  {
 
-  constructor() { }
+  
+  prioridades: Prioridade[];
 
-  ngOnInit(): void {
+  select: Prioridade;
+
+  constructor() {
+      this.prioridades = [
+          {name: 'Baixo'},
+          {name: 'Madio'},
+          {name: 'Alto'}
+      ];
+
+      this.select={name:""}
   }
 
+
 }
+

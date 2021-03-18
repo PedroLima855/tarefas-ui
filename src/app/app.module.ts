@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 
 
@@ -28,7 +30,9 @@ import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.co
     BrowserAnimationsModule,
     ButtonModule,
     TableModule,
-    InputTextareaModule
+    InputTextareaModule,
+    CalendarModule,
+    NgxMaskModule.forRoot()
     
   ],
   providers: [],
