@@ -15,6 +15,15 @@ import { AppComponent } from './app.component';
 import { ListagemTarefasComponent } from './listagem-tarefas/listagem-tarefas.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+
+  { path: 'listagem', component: ListagemTarefasComponent },
+  { path: 'listagem/cadastrar', component: CadastrarTarefaComponent },
+  { path: 'listagem/cadastrar/:codigo', component: CadastrarTarefaComponent }
+
+];
 
 @NgModule({
   declarations: [
@@ -32,7 +41,8 @@ import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.co
     TableModule,
     InputTextareaModule,
     CalendarModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    RouterModule.forRoot(routes)
     
   ],
   providers: [],
