@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ListagemTarefasService, TarefaFiltro } from './listagem-tarefas.service';
 import { Situacao } from './Situacao';
 
@@ -14,6 +14,9 @@ export class ListagemTarefasComponent implements OnInit {
   numero: string
   titulo: string;
   responsavel: string;
+
+  @ViewChild('tabela') 
+  tabela: any;
 
   select: Situacao;
 
@@ -52,13 +55,13 @@ export class ListagemTarefasComponent implements OnInit {
   }
 
   public excluir(tarefa: any){
-
+    this.service.excluir(tarefa.id)
+    .then(() => {
+      this.tabela.first = 0;
+      this.pesquisar()
+    });
 
   }
   
-  acao(){
-
-    console.log(this.select)
-  }
 
 }

@@ -47,7 +47,7 @@
   
 
             <p-table [value]="tarefasList" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="3"
-                [responsive]="true">
+                [responsive]="true" #tabela>
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="col-lista">Numero</th>
@@ -58,7 +58,7 @@
                     </tr>
                 </ng-template>
 
-                <ng-template pTemplate="body" let-tarefa let-lanc="rowData">
+                <ng-template pTemplate="body" let-tarefa>
                     <tr>
                         <td class="col-tarefa">{{ tarefa.id }}</td>
                         <td class="col-tarefa">{{ tarefa.titulo }}</td>
@@ -66,9 +66,9 @@
                         <td class="col-tarefa">
                             <a pButton icon="pi pi-pencil" class="aButton" pTooltip="Editar" tooltipPosition="top"></a>
                             <button pButton icon="pi pi-trash" class="aButton" pTooltip="Excluir"
-                                tooltipPosition="top"></button>
+                                tooltipPosition="top" (click)="excluir(tarefa)"></button>
                             <button pButton icon="pi pi-check" class="aButton" pTooltip="Concluir"
-                                tooltipPosition="top" (click)="excluir(lanc)"></button>
+                                tooltipPosition="top"></button>
                         </td>
 
                     </tr>
