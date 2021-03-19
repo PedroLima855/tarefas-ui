@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Responsavel } from './Responsavel';
+import { ListagemTarefasService, TarefaFiltro } from './listagem-tarefas.service';
+import { Situacao } from './Situacao';
 
 
 @Component({
@@ -7,41 +8,57 @@ import { Responsavel } from './Responsavel';
   templateUrl: './listagem-tarefas.component.html',
   styleUrls: ['./listagem-tarefas.component.css']
 })
-export class ListagemTarefasComponent  {
+export class ListagemTarefasComponent implements OnInit {
 
-  responsaveis: Responsavel[];
+  situacao: Situacao[];
+  numero: string
+  titulo: string;
+  responsavel: string;
 
-  select: Responsavel;
+  select: Situacao;
 
-  constructor() {
-      this.responsaveis = [
-          {name: 'Em andamento'},
-          {name: 'Concluido'}
+  constructor(private service: ListagemTarefasService) {
+      this.situacao = [
+          {name: 'Em andamento', status: 'Andamento'},
+          {name: 'Concluida', status: 'Concluida'}
       ];
 
-      this.select={name:""}
+      this.select={name:"", status: ""}
+      this.titulo="";
+      this.numero="";
+      this.responsavel="";
   }
 
-  tarefas: any = [
+  tarefasList: any = []
 
-    { numero: '1', titulo: 'Jogar', responsavel: 'Pedro'},
+  ngOnInit(){
+    this.pesquisar();
+    this.select = this.situacao[0];
+  }
 
-    { numero: '2', titulo: 'Lavar louça', responsavel: 'Pedro'},
+  public pesquisar(){
 
-    { numero: '3', titulo: 'Alimentar tartaruga', responsavel: 'Pedro'},
+    const filtro: any = {
 
-    { numero: '4', titulo: 'Jogar', responsavel: 'Ester'},
+      titulo: this.titulo,
+      numero: this.numero,
+      responsavel: this.responsavel,
+      situacao: this.select.status
 
-    { numero: '5', titulo: 'Tirar lixo', responsavel: 'Pedro',},
+    }
 
-    { numero: '6', titulo: 'Almoçar', responsavel: 'Todos'},
+    this.service.pesquisar(filtro)
+    .then(tarefas => this.tarefasList = tarefas);
+  }
 
-    { numero: '7', titulo: 'Programar', responsavel: 'pedro'},
+  public excluir(tarefa: any){
 
-    { numero: '8', titulo: 'Fazer culto', responsavel: 'Vanessa'},
 
-    { numero: '9', titulo: 'jogar', responsavel: 'Vanessa'}
-  ]
- 
+  }
+  
+  acao(){
+
+    console.log(this.select)
+  }
 
 }

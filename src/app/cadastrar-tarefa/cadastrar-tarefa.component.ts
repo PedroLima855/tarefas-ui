@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CadastrarTarefaService } from './cadastrar-tarefa.service';
 import { Prioridade } from './Prioridade';
 
 
@@ -14,7 +15,7 @@ export class CadastrarTarefaComponent  {
 
   select: Prioridade;
 
-  constructor() {
+  constructor(private service: CadastrarTarefaService) {
       this.prioridades = [
           {name: 'Baixo'},
           {name: 'Madio'},
@@ -23,6 +24,8 @@ export class CadastrarTarefaComponent  {
 
       this.select={name:""}
   }
+
+
 
 
 }

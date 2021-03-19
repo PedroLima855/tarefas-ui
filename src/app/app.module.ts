@@ -8,6 +8,10 @@ import { TableModule } from 'primeng/table';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 
@@ -16,6 +20,8 @@ import { ListagemTarefasComponent } from './listagem-tarefas/listagem-tarefas.co
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.component';
 import { RouterModule, Routes } from '@angular/router';
+import { CadastrarTarefaService } from './cadastrar-tarefa/cadastrar-tarefa.service';
+import { ListagemTarefasService } from './listagem-tarefas/listagem-tarefas.service';
 
 const routes: Routes = [
 
@@ -42,10 +48,13 @@ const routes: Routes = [
     InputTextareaModule,
     CalendarModule,
     NgxMaskModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    ReactiveFormsModule
+ 
     
   ],
-  providers: [],
+  providers: [ListagemTarefasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
