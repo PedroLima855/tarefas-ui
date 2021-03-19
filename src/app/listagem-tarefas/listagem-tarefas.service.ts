@@ -24,7 +24,6 @@ export class ListagemTarefasService {
 
   public pesquisar(filtro: TarefaFiltro): Promise<any> {
 
-    const params = new URLSearchParams();
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==');
 
@@ -54,6 +53,7 @@ export class ListagemTarefasService {
       .toPromise()
       .then(() => null);
   }
+
 
 }
 

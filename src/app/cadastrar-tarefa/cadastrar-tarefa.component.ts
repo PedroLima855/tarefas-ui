@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Form, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CadastrarTarefaService } from './cadastrar-tarefa.service';
 import { Prioridade } from './Prioridade';
+import { Tarefa } from './Tarefa';
 
 
 @Component({
@@ -8,24 +11,38 @@ import { Prioridade } from './Prioridade';
   templateUrl: './cadastrar-tarefa.component.html',
   styleUrls: ['./cadastrar-tarefa.component.css']
 })
-export class CadastrarTarefaComponent  {
+export class CadastrarTarefaComponent {
 
-  
   prioridades: Prioridade[];
 
   select: Prioridade;
 
-  constructor(private service: CadastrarTarefaService) {
-      this.prioridades = [
-          {name: 'Baixo'},
-          {name: 'Madio'},
-          {name: 'Alto'}
-      ];
+  tarefa = new Tarefa()
 
-      this.select={name:""}
+  constructor(private service: CadastrarTarefaService, private toastr: ToastrService) {
+    this.prioridades = [
+      { name: 'Baixo', prioridade: 'BAIXA' },
+      { name: 'Medio', prioridade: 'MEDIA' },
+      { name: 'Alto', prioridade: 'ALTA' }
+
+    ];
+
+    this.select = { name: "", prioridade: "" }
   }
 
+  ngOnInit() {
+    this.select = this.prioridades[0];
+  }
 
+  salvar(form: Form) {
+
+    this.tarefa.prioridade = this.select.prioridade
+    
+    this.service.salvar(this.tarefa)
+      .then(() => null)
+    this.toastr.success('Tarefa cadastrada com sucesso');
+
+  }
 
 
 }

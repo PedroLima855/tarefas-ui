@@ -15,12 +15,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { ListagemTarefasComponent } from './listagem-tarefas/listagem-tarefas.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.component';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastrarTarefaService } from './cadastrar-tarefa/cadastrar-tarefa.service';
 import { ListagemTarefasService } from './listagem-tarefas/listagem-tarefas.service';
 
 const routes: Routes = [
@@ -50,11 +50,11 @@ const routes: Routes = [
     NgxMaskModule.forRoot(),
     RouterModule.forRoot(routes),
     HttpClientModule,
-    ReactiveFormsModule
- 
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
     
   ],
-  providers: [ListagemTarefasService],
+  providers: [ListagemTarefasService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

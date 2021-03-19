@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ListagemTarefasService, TarefaFiltro } from './listagem-tarefas.service';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
+import { Message } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
+import { ListagemTarefasService } from './listagem-tarefas.service';
 import { Situacao } from './Situacao';
 
 
@@ -15,31 +19,33 @@ export class ListagemTarefasComponent implements OnInit {
   titulo: string;
   responsavel: string;
 
-  @ViewChild('tabela') 
+
+  @ViewChild('tabela')
   tabela: any;
 
   select: Situacao;
 
-  constructor(private service: ListagemTarefasService) {
-      this.situacao = [
-          {name: 'Em andamento', status: 'Andamento'},
-          {name: 'Concluida', status: 'Concluida'}
-      ];
+  constructor(private service: ListagemTarefasService, private toastr: ToastrService) {
 
-      this.select={name:"", status: ""}
-      this.titulo="";
-      this.numero="";
-      this.responsavel="";
+    this.situacao = [
+      { name: 'Em andamento', status: 'Andamento' },
+      { name: 'Concluida', status: 'Concluida' }
+    ];
+
+    this.select = { name: "", status: "" }
+    this.titulo = "";
+    this.numero = "";
+    this.responsavel = "";
   }
 
   tarefasList: any = []
 
-  ngOnInit(){
+  ngOnInit() {
     this.pesquisar();
     this.select = this.situacao[0];
   }
 
-  public pesquisar(){
+  public pesquisar() {
 
     const filtro: any = {
 
@@ -51,17 +57,19 @@ export class ListagemTarefasComponent implements OnInit {
     }
 
     this.service.pesquisar(filtro)
-    .then(tarefas => this.tarefasList = tarefas);
+      .then(tarefas => this.tarefasList = tarefas);
   }
 
-  public excluir(tarefa: any){
+  public excluir(tarefa: any) {
     this.service.excluir(tarefa.id)
-    .then(() => {
-      this.tabela.first = 0;
-      this.pesquisar()
-    });
+      .then(() => {
+        this.toastr.success('Tarefa excluida com sucesso');
+        this.tabela.first = 0;
+        this.pesquisar()
+      });
 
   }
+
   
 
 }

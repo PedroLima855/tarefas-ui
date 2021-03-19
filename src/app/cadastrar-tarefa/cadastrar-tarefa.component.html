@@ -6,51 +6,59 @@
             <h1>Cadastrar Tarefa</h1>
         </div>
 
-        <div class="ui-g-12" style="margin-top: 20px;">
-            <label>Título:</label>
+        <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+            <div class="ui-g-12" style="margin-top: 20px;">
+                <label>Título:</label>
+                <br>
+                <input type="text" pInputText [(ngModel)]="tarefa.titulo" name="titulo" style="width: 80%;">
+            </div>
+
+            <div class="ui-g-12" style="margin-top: 20px;">
+                <label>Descrição:</label>
+                <br>
+                <textarea rows="5" cols="89" pInputTextarea [(ngModel)]="tarefa.descricao" name="descricao"></textarea>
+            </div>
+
             <br>
-            <input type="text" pInputText style="width: 80%;">
-        </div>
 
-        <div class="ui-g-12" style="margin-top: 20px;">
-            <label>Descrição:</label>
+            <div class="p-grid">
+
+                <div class="p-col">
+                    <label style="margin-right: 20px;">Responsavel:</label>
+                    <input type="text" [(ngModel)]="tarefa.responsavel" pInputText name="responsavel"
+                        style="width: 53%;">
+                </div>
+
+                <div class="p-col">
+                    <label style="margin-right: 20px;">Prioridade:</label>
+                    <p-dropdown [options]="prioridades" [(ngModel)]="select" optionLabel="name" name="prioridade">
+                    </p-dropdown>
+                </div>
+
+                <div class="p-col">
+                </div>
+
+            </div>
+
             <br>
-            <textarea rows="5" cols="89" pInputTextarea></textarea>
-        </div>
 
-        <br>
+            <div>
+                <label style="margin-right: 20px;">Deadline:</label>
+                <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"
+                    [(ngModel)]="tarefa.deadline" name="deadline" ></p-calendar>
 
-        <div class="p-grid">
-
-            <div class="p-col">
-                <label style="margin-right: 20px;">Responsavel:</label>
-                <input type="text" pInputText style="width: 48.5%;">
             </div>
 
-            <div class="p-col">
-               <label style="margin-right: 20px;">Prioridade:</label>
-               <p-dropdown [options]="prioridades" [(ngModel)]="select" optionLabel="name"></p-dropdown>
+            <br>
+
+            <div class="ui-g-12">
+
+                <button pButton label="Cadastrar" type="submit" style="width: 30%; margin-left: 325px;"></button>
+
             </div>
 
-            <div class="p-col">
-            </div>
-
-        </div>
-
-        <br>
-
-        <div>
-            <label style="margin-right: 20px;">Deadine:</label>
-            <input matInput mask="00/00/0000"/>
-        </div>
-
-        <br>
-        
-        <div class="ui-g-12">
-
-            <a pButton label="Cadastrar" style="width: 30%; margin-left: 325px;"></a>
-    
-        </div>
+        </form>
 
         <br>
         <br>
@@ -62,7 +70,7 @@
         <div class="ui-g-12">
 
             <button routerLink="/listagem" pButton label="Buscar Tarefas"></button>
-    
+
         </div>
 
 
