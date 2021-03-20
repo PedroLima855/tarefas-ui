@@ -44,14 +44,12 @@
             <br>
 
             <div>
+                
                 <label style="margin-right: 20px;">Deadline:</label>
-                <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"
-                    [(ngModel)]="tarefa.deadline" name="deadline" ></p-calendar>
+                <input type="text" pInputText [(ngModel)]="tarefa.deadline" name="deadline">
 
             </div>
 
-            <br>
-            <br>
             <br>
 
             <div class="ui-g-12">
@@ -62,6 +60,7 @@
 
         </form>
 
+        <br>
         <br>
         <br>
         <br>

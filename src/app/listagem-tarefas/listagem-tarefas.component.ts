@@ -70,6 +70,17 @@ export class ListagemTarefasComponent implements OnInit {
 
   }
 
+  public mudarSituacao(tarefa: any){
+    this.service.mudarSituacao(tarefa.id, tarefa)
+      .then(() => {
+        this.toastr.success('Tarefa concluida');
+        this.tabela.first = 0;
+        this.pesquisar()
+      });
+
+
+  }
+
   
 
 }

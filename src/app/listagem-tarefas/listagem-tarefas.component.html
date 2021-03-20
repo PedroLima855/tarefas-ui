@@ -64,11 +64,13 @@
                         <td class="col-tarefa">{{ tarefa.titulo }}</td>
                         <td class="col-tarefa">{{ tarefa.responsavel }}</td>
                         <td class="col-tarefa">
-                            <a pButton icon="pi pi-pencil" class="aButton" pTooltip="Editar" tooltipPosition="top"></a>
+                            <button pButton icon="pi pi-pencil" class="aButton" pTooltip="Editar" tooltipPosition="top" 
+                            [routerLink]="['/listagem/cadastrar', tarefa.id]"></button>
+                           
                             <button pButton icon="pi pi-trash" class="aButton" pTooltip="Excluir"
                                 tooltipPosition="top" (click)="excluir(tarefa)"></button>
                             <button pButton icon="pi pi-check" class="aButton" pTooltip="Concluir"
-                                tooltipPosition="top"></button>
+                                tooltipPosition="top" (click)="mudarSituacao(tarefa)"></button>
                         </td>
 
                     </tr>

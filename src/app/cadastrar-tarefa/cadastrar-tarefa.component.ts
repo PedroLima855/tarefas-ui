@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { flushMicrotasks } from '@angular/core/testing';
 import { Form, FormControl, NgControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CadastrarTarefaService } from './cadastrar-tarefa.service';
 import { Prioridade } from './Prioridade';
@@ -20,7 +21,12 @@ export class CadastrarTarefaComponent {
 
   tarefa = new Tarefa()
 
-  constructor(private service: CadastrarTarefaService, private toastr: ToastrService) {
+  constructor(
+    private service: CadastrarTarefaService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute
+
+  ) {
     this.prioridades = [
       { name: 'Baixo', prioridade: 'BAIXA' },
       { name: 'Medio', prioridade: 'MEDIA' },
@@ -33,6 +39,25 @@ export class CadastrarTarefaComponent {
 
   ngOnInit() {
     this.select = this.prioridades[0];
+
+    const codigoTarefa = this.route.snapshot.params['codigo'];
+
+    if (codigoTarefa) {
+
+      this.buscarPorId(codigoTarefa);
+
+    }
+    
+  }
+  
+  public buscarPorId(codigo: number) {
+    this.service.buscarPorId(codigo)
+    .then(tarefa => {
+
+      this.tarefa = tarefa;
+
+    })
+
   }
 
   salvar(form: FormControl) {
