@@ -3,6 +3,7 @@ import { flushMicrotasks } from '@angular/core/testing';
 import { Form, FormControl, NgControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorHandlerService } from '../handler/error-handler.service';
 import { CadastrarTarefaService } from './cadastrar-tarefa.service';
 import { Prioridade } from './Prioridade';
 import { Tarefa } from './Tarefa';
@@ -24,7 +25,8 @@ export class CadastrarTarefaComponent {
   constructor(
     private service: CadastrarTarefaService,
     private toastr: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private erroHandler: ErrorHandlerService
 
   ) {
     this.prioridades = [
@@ -87,24 +89,29 @@ export class CadastrarTarefaComponent {
     this.tarefa.prioridade = this.select.prioridade
 
     this.service.salvar(this.tarefa)
-      .then(() => null)
+      .then(() => {
+        this.toastr.success('Tarefa cadastrada com sucesso');
+      })
+      .catch(erro => this.erroHandler.handle(erro));
 
     form.reset;
     this.tarefa = new Tarefa();
-
-    this.toastr.success('Tarefa cadastrada com sucesso');
 
   }
 
   public atualizarTarefa(form: FormControl) {
 
     this.service.atualizarTarefa(this.id, this.tarefa)
-      .then(() => null)
+      .then(() => {
+        
+        this.toastr.success('Tarefa atualizada com sucesso');
+      })
+      .catch(erro => this.erroHandler.handle(erro));
 
     form.reset;
     this.tarefa = new Tarefa();
 
-    this.toastr.success('Tarefa atualizada com sucesso');
+    
   }
 
 

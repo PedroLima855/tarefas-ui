@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { ErrorHandlerService } from '../handler/error-handler.service';
 import { ListagemTarefasService } from './listagem-tarefas.service';
 import { Situacao } from './Situacao';
 
@@ -25,7 +26,8 @@ export class ListagemTarefasComponent implements OnInit {
 
   select: Situacao;
 
-  constructor(private service: ListagemTarefasService, private toastr: ToastrService) {
+  constructor(private service: ListagemTarefasService, private toastr: ToastrService, 
+    private erroHandler: ErrorHandlerService) {
 
     this.situacao = [
       { name: 'Em andamento', status: 'Andamento' },
@@ -57,7 +59,8 @@ export class ListagemTarefasComponent implements OnInit {
     }
 
     this.service.pesquisar(filtro)
-      .then(tarefas => this.tarefasList = tarefas);
+      .then(tarefas => this.tarefasList = tarefas)
+      .catch(erro => this.erroHandler.handle(erro));
   }
 
   public excluir(tarefa: any) {
@@ -66,7 +69,8 @@ export class ListagemTarefasComponent implements OnInit {
         this.toastr.success('Tarefa excluida com sucesso');
         this.tabela.first = 0;
         this.pesquisar()
-      });
+      })
+      .catch(this.toastr.error);
 
   }
 
@@ -76,7 +80,8 @@ export class ListagemTarefasComponent implements OnInit {
         this.toastr.success('Tarefa concluida');
         this.tabela.first = 0;
         this.pesquisar()
-      });
+      })
+      .catch(erro => this.erroHandler.handle(erro));
 
 
   }

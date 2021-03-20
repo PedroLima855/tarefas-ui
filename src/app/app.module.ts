@@ -10,7 +10,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { JwtModule } from "@auth0/angular-jwt";
 
 
 
@@ -22,13 +22,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ListagemTarefasService } from './listagem-tarefas/listagem-tarefas.service';
-import { AtualizarTarefasComponent } from './atualizar-tarefas/atualizar-tarefas.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+
+
+
 
 const routes: Routes = [
 
+  { path: '', redirectTo: 'listagem', pathMatch: 'full' },
   { path: 'listagem', component: ListagemTarefasComponent },
   { path: 'listagem/cadastrar', component: CadastrarTarefaComponent },
-  { path: 'listagem/cadastrar/:codigo', component: CadastrarTarefaComponent }
+  { path: 'listagem/cadastrar/:codigo', component: CadastrarTarefaComponent },
+  { path: 'login', component: LoginFormComponent }
 
 ];
 
@@ -38,7 +43,7 @@ const routes: Routes = [
     ListagemTarefasComponent,
     NavbarComponent,
     CadastrarTarefaComponent,
-    AtualizarTarefasComponent
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    JwtModule
+    
     
   ],
   providers: [ListagemTarefasService], 
