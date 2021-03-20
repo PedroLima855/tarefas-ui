@@ -22,6 +22,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ListagemTarefasService } from './listagem-tarefas/listagem-tarefas.service';
+import { AtualizarTarefasComponent } from './atualizar-tarefas/atualizar-tarefas.component';
 
 const routes: Routes = [
 
@@ -36,7 +37,8 @@ const routes: Routes = [
     AppComponent,
     ListagemTarefasComponent,
     NavbarComponent,
-    CadastrarTarefaComponent
+    CadastrarTarefaComponent,
+    AtualizarTarefasComponent
   ],
   imports: [
     BrowserModule,

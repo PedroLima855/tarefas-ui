@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { flushMicrotasks } from '@angular/core/testing';
-import { Form, FormControl, NgControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CadastrarTarefaService } from './cadastrar-tarefa.service';
-import { Prioridade } from './Prioridade';
-import { Tarefa } from './Tarefa';
-
+import { CadastrarTarefaService } from '../cadastrar-tarefa/cadastrar-tarefa.service';
+import { Prioridade } from '../cadastrar-tarefa/Prioridade';
+import { Tarefa } from '../cadastrar-tarefa/Tarefa';
 
 @Component({
-  selector: 'app-cadastrar-tarefa',
-  templateUrl: './cadastrar-tarefa.component.html',
-  styleUrls: ['./cadastrar-tarefa.component.css']
+  selector: 'app-atualizar-tarefas',
+  templateUrl: './atualizar-tarefas.component.html',
+  styleUrls: ['./atualizar-tarefas.component.css']
 })
-export class CadastrarTarefaComponent {
+export class AtualizarTarefasComponent implements OnInit {
 
   prioridades: Prioridade[];
 
@@ -38,8 +36,8 @@ export class CadastrarTarefaComponent {
   }
 
   ngOnInit() {
-
     this.select = this.prioridades[0];
+
     const codigoTarefa = this.route.snapshot.params['codigo'];
 
     if (codigoTarefa) {
@@ -47,42 +45,20 @@ export class CadastrarTarefaComponent {
       this.buscarPorId(codigoTarefa);
 
     }
-
+    
   }
-
-  id = this.route.snapshot.params['codigo']
-
+  
   public buscarPorId(codigo: number) {
     this.service.buscarPorId(codigo)
-      .then(tarefa => {
+    .then(tarefa => {
 
-        this.tarefa = tarefa;
+      this.tarefa = tarefa;
 
-      })
-
-  }
-
-  get editando() {
-
-    return Boolean(this.id)
+    })
 
   }
 
-  public salvar(form: FormControl) {
-
-    if (this.editando) {
-
-      this.atualizarTarefa(form);
-
-    } else {
-
-      this.adicionarTarefa(form);
-
-    }
-
-  }
-
-  public adicionarTarefa(form: FormControl) {
+  salvar(form: FormControl) {
 
     this.tarefa.prioridade = this.select.prioridade
 
@@ -96,17 +72,4 @@ export class CadastrarTarefaComponent {
 
   }
 
-  public atualizarTarefa(form: FormControl) {
-
-    this.service.atualizarTarefa(this.id, this.tarefa)
-      .then(() => null)
-
-    form.reset;
-    this.tarefa = new Tarefa();
-
-    this.toastr.success('Tarefa atualizada com sucesso');
-  }
-
-
 }
-

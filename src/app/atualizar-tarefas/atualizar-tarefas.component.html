@@ -3,7 +3,7 @@
     <div class="ui-g">
 
         <div class="ui-g-12">
-            <h1> {{ editando ? 'Editar' : 'Casdastrar' }} Tarefa</h1>
+            <h1>Atualizar Tarefa</h1>
         </div>
 
         <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f.value)">
@@ -44,9 +44,9 @@
             <br>
 
             <div>
-
+                
                 <label style="margin-right: 20px;">Deadline:</label>
-                <input type="text" pInputText matInput mask="00-00-0000" [(ngModel)]="tarefa.deadline" name="deadline">
+                <input type="text" pInputText [(ngModel)]="tarefa.deadline" name="deadline">
 
             </div>
 

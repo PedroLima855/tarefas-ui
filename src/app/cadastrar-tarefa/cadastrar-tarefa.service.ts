@@ -22,7 +22,7 @@ export class CadastrarTarefaService {
       .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==')
       .append('Content-Type', 'application/json');
 
-      tarefa.deadline?.toISOString();
+   
 
       return this.http.post<Tarefa>(this.tarefaUrlSalvar, JSON.stringify(tarefa), { headers })
       .toPromise()
