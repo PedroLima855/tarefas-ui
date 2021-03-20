@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl } from '@angular/forms';
+import { flushMicrotasks } from '@angular/core/testing';
+import { Form, FormControl, NgControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CadastrarTarefaService } from './cadastrar-tarefa.service';
 import { Prioridade } from './Prioridade';
@@ -34,13 +35,18 @@ export class CadastrarTarefaComponent {
     this.select = this.prioridades[0];
   }
 
-  salvar(form: Form) {
+  salvar(form: FormControl) {
 
     this.tarefa.prioridade = this.select.prioridade
-    
+
     this.service.salvar(this.tarefa)
       .then(() => null)
+
+    form.reset;
+    this.tarefa = new Tarefa();
+
     this.toastr.success('Tarefa cadastrada com sucesso');
+
 
   }
 

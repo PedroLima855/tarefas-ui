@@ -6,7 +6,7 @@
             <h1>Cadastrar Tarefa</h1>
         </div>
 
-        <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+        <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f.value)">
 
             <div class="ui-g-12" style="margin-top: 20px;">
                 <label>Título:</label>
@@ -51,6 +51,8 @@
             </div>
 
             <br>
+            <br>
+            <br>
 
             <div class="ui-g-12">
 
@@ -60,7 +62,6 @@
 
         </form>
 
-        <br>
         <br>
         <br>
         <br>
