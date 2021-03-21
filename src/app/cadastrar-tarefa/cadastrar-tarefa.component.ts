@@ -103,7 +103,7 @@ export class CadastrarTarefaComponent {
 
     this.service.atualizarTarefa(this.id, this.tarefa)
       .then(() => {
-        
+
         this.toastr.success('Tarefa atualizada com sucesso');
       })
       .catch(erro => this.erroHandler.handle(erro));
@@ -111,7 +111,7 @@ export class CadastrarTarefaComponent {
     form.reset;
     this.tarefa = new Tarefa();
 
-    
+
   }
 
 

@@ -18,13 +18,8 @@ export class CadastrarTarefaService {
 
   public salvar(tarefa: Tarefa): Promise<Tarefa> {
 
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==')
-      .append('Content-Type', 'application/json');
-
    
-
-      return this.http.post<Tarefa>(this.tarefaUrlSalvar, JSON.stringify(tarefa), { headers })
+      return this.http.post<Tarefa>(this.tarefaUrlSalvar, JSON.stringify(tarefa))
       .toPromise()
       .then(response => response);
 
@@ -32,11 +27,7 @@ export class CadastrarTarefaService {
 
   public atualizarTarefa(codigo: number, tarefa: Tarefa): Promise<Tarefa>{
 
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==')
-      .append('Content-Type', 'application/json');
-
-      return this.http.put<Tarefa>(`${this.tarefaUrlAtualizar}/${codigo}`, tarefa, { headers })
+      return this.http.put<Tarefa>(`${this.tarefaUrlAtualizar}/${codigo}`, tarefa)
       .toPromise()
       .then(response => response);
 
@@ -44,10 +35,7 @@ export class CadastrarTarefaService {
 
   public buscarPorId(codigo: number): Promise<any>{
 
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==');
-
-    return this.http.get(`${this.tarefaUrlListar}/${codigo}`, { headers })
+    return this.http.get(`${this.tarefaUrlListar}/${codigo}`)
       .toPromise()
       .then(response => response);
 

@@ -29,6 +29,7 @@ export class AuthService {
       .then(response => {
         this.armazenarToken(response.access_token);
         console.log(this.jwtPayload)
+        console.log(response)
       })
   }
 
@@ -43,6 +44,43 @@ export class AuthService {
     if (token) {
       this.armazenarToken(token);
     }
+  }
+
+  getAuthorizationToken() {
+    const token = window.localStorage.getItem('token');
+    return token;
+  }
+
+  getTokenExpirationDate(token: string): Date {
+    const decoded: any = this.jwtPayload
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  isTokenExpired(token?: string): boolean {
+    if (!token) {
+      return true;
+    }
+
+    const date = this.getTokenExpirationDate(token);
+    if (date === undefined) {
+      return false;
+    }
+
+    return !(date.valueOf() > new Date().valueOf());
+  }
+
+  isUserLoggedIn() {
+    const token = this.getAuthorizationToken();
+    if (!token) {
+      return false;
+    } else if (this.isTokenExpired(token)) {
+      return false;
+    }
+
+    return true;
   }
 
 

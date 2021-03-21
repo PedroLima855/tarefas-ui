@@ -30,7 +30,6 @@ export class ErrorHandlerService {
     } else if (errorResponse instanceof HttpErrorResponse
       && errorResponse.status >= 401 && errorResponse.status <= 499) {
 
-      console.error('Ocorreu um erro', errorResponse);
       this.toastr.error('Ocorreu um erro ao processar a sua solicitação');
     }
 

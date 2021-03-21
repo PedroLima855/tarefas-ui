@@ -19,7 +19,9 @@ export class LoginFormComponent {
   public login(usuario: string, senha: string) {
 
       this.service.login(usuario, senha)
-      .then(() => null)
+      .then(() => {
+        this.router.navigate(['/listagem']);
+      })
       .catch(erro => {
         this.erroHandler.handle(erro);
       });

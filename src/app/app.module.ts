@@ -13,8 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
 
 
-
-
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { ListagemTarefasComponent } from './listagem-tarefas/listagem-tarefas.component';
@@ -23,9 +21,12 @@ import { CadastrarTarefaComponent } from './cadastrar-tarefa/cadastrar-tarefa.co
 import { RouterModule, Routes } from '@angular/router';
 import { ListagemTarefasService } from './listagem-tarefas/listagem-tarefas.service';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { httpInterceptorProviders } from './http-interceptors';
 
 
-
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 const routes: Routes = [
 
@@ -59,11 +60,17 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    JwtModule
+    JwtModule.forRoot({
+      config: {
+        
+        tokenGetter: tokenGetter,
+   
+      }
+    })
     
     
   ],
-  providers: [ListagemTarefasService], 
+  providers: [ListagemTarefasService, httpInterceptorProviders], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

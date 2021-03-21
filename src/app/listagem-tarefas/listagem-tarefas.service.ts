@@ -25,12 +25,11 @@ export class ListagemTarefasService {
 
   }
 
+  token = window.localStorage.getItem('token');
+
   public pesquisar(filtro: TarefaFiltro): Promise<any> {
 
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==');
-
-    return this.http.get(`${this.tarefaUrlListar}${this.paramsToURLSearch(filtro)}`, { headers })
+    return this.http.get(`${this.tarefaUrlListar}${this.paramsToURLSearch(filtro)}`)
       .toPromise()
       .then(response => response)
 
@@ -49,10 +48,7 @@ export class ListagemTarefasService {
 
   public excluir(codigo: number): Promise<any> {
 
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ZXNpZzp0ZXN0ZQ==');
-
-    return this.http.delete(`${this.tarefaUrlDeletar}/${codigo}`, { headers })
+    return this.http.delete(`${this.tarefaUrlDeletar}/${codigo}`)
       .toPromise()
       .then(() => null);
   }
@@ -65,7 +61,7 @@ export class ListagemTarefasService {
 
       corpo = 'Concluida'
 
-    return this.http.patch(`${this.tarefaUrlMudarSituacao}/${codigo}`, corpo, { headers })
+    return this.http.patch(`${this.tarefaUrlMudarSituacao}/${codigo}`, corpo)
       .toPromise()
       .then(() => null);
 

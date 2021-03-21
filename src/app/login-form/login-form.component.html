@@ -1,8 +1,5 @@
 <div class="container" style="max-width: 400px; margin: auto">
 
-
-    {{service.jwtPayload | json}}
-
     <form autocomplete="off" #f="ngForm">
 
 
@@ -11,13 +8,15 @@
         </div>
 
         <div class="ui-g-12">
-            <input pInputText style="width: 80%;" type="email" name="usuario" placeholder="E-mail" ngModel required #usuario>
+            <input pInputText style="width: 80%;" type="email" name="usuario" placeholder="E-mail" ngModel required
+                #usuario>
         </div>
 
         <br>
 
         <div class="ui-g-12">
-            <input pInputText style="width: 80%;" type="password" name="senha" placeholder="Senha" ngModel required #senha>
+            <input pInputText style="width: 80%;" type="password" name="senha" placeholder="Senha" ngModel required
+                #senha>
         </div>
 
         <br>
