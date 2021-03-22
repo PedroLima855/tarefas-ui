@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class AuthService {
   jwtPayload: any;
   private jwtHelper = new JwtHelperService
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.carregarToken();
    }
 
@@ -28,9 +29,14 @@ export class AuthService {
       .toPromise()
       .then(response => {
         this.armazenarToken(response.access_token);
-        console.log(this.jwtPayload)
-        console.log(response)
       })
+  }
+
+  logout(){
+
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login')
+
   }
 
   private armazenarToken(token: string) {

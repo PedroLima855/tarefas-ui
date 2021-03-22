@@ -12,4 +12,10 @@ export class NavbarComponent  {
 
   constructor(public service: AuthService){}
 
+  logout(){
+
+    this.service.logout()
+
+  }
+
 }

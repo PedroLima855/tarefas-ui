@@ -22,10 +22,12 @@ export class ErrorHandlerService {
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
 
+      this.toastr.error('Usuario ou senha invalidos');
+
     } else if (errorResponse instanceof HttpErrorResponse
       && errorResponse.status === 400) {
 
-      this.toastr.error('Usuario ou senha invalidos');
+      this.toastr.error('Ocorreu um erro ao processar a sua solicitação');
 
     } else if (errorResponse instanceof HttpErrorResponse
       && errorResponse.status >= 401 && errorResponse.status <= 499) {
@@ -33,6 +35,7 @@ export class ErrorHandlerService {
       this.toastr.error('Ocorreu um erro ao processar a sua solicitação');
     }
 
+    
     this.messageService.add({ severity: 'error' });
   }
 }

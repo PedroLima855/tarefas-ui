@@ -22,6 +22,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListagemTarefasService } from './listagem-tarefas/listagem-tarefas.service';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { LoginGuard } from './guard/login.guard';
+import { AuthGuard } from './guard/auth.guard';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 export function tokenGetter() {
@@ -31,10 +34,10 @@ export function tokenGetter() {
 const routes: Routes = [
 
   { path: '', redirectTo: 'listagem', pathMatch: 'full' },
-  { path: 'listagem', component: ListagemTarefasComponent },
-  { path: 'listagem/cadastrar', component: CadastrarTarefaComponent },
-  { path: 'listagem/cadastrar/:codigo', component: CadastrarTarefaComponent },
-  { path: 'login', component: LoginFormComponent }
+  { path: 'listagem', canActivate: [AuthGuard], component: ListagemTarefasComponent },
+  { path: 'listagem/cadastrar', canActivate: [AuthGuard], component: CadastrarTarefaComponent },
+  { path: 'listagem/cadastrar/:codigo', canActivate: [AuthGuard], component: CadastrarTarefaComponent },
+  { path: 'login', canActivate: [LoginGuard], component: LoginFormComponent }
 
 ];
 
@@ -59,18 +62,16 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
-    JwtModule.forRoot({
-      config: {
-        
-        tokenGetter: tokenGetter,
-   
-      }
-    })
+    JwtModule,
+    TooltipModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
+    
     
     
   ],
-  providers: [ListagemTarefasService, httpInterceptorProviders], 
+  providers: [ListagemTarefasService, LoginGuard, AuthGuard, httpInterceptorProviders], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

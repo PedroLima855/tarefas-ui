@@ -57,6 +57,7 @@ export class CadastrarTarefaComponent {
   public buscarPorId(codigo: number) {
     this.service.buscarPorId(codigo)
       .then(tarefa => {
+        tarefa.deadline = new Date(tarefa.deadline)
 
         this.tarefa = tarefa;
 

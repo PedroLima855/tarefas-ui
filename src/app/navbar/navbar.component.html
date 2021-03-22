@@ -12,8 +12,8 @@
     </div>
   
     <ul class="navbar-menu" [hidden]="!menu">
-      <li class="navbar-usuario">{{ service.jwtPayload?.nome }}</li>
-      <li class="navbar-menuitem"><a href="#">Logout</a></li>
+      <li class="navbar-usuario">{{ service.jwtPayload?.user_name }}</li>
+      <li class="navbar-menuitem"><a (click)="logout()" >Logout</a></li>
     </ul>
   
   
