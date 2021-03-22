@@ -8,9 +8,9 @@ import * as moment from 'moment';
 })
 export class CadastrarTarefaService {
 
-  tarefaUrlListar = 'http://localhost:9091/tarefas/listar'
-  tarefaUrlSalvar = 'http://localhost:9091/tarefas/salvar'
-  tarefaUrlAtualizar = 'http://localhost:9091/tarefas/atualizar'
+  tarefaUrlListar = 'http://209.126.10.114:3803/tarefas/listar'
+  tarefaUrlSalvar = 'http://209.126.10.114:3803/tarefas/salvar'
+  tarefaUrlAtualizar = 'http://209.126.10.114:3803/tarefas/atualizar'
 
   constructor(private http: HttpClient) {
 

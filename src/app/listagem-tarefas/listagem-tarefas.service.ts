@@ -16,9 +16,9 @@ export interface TarefaFiltro {
 })
 export class ListagemTarefasService {
 
-  tarefaUrlListar = 'http://localhost:9091/tarefas/listar'
-  tarefaUrlDeletar = 'http://localhost:9091/tarefas/deletar'
-  tarefaUrlMudarSituacao = 'http://localhost:9091/tarefas/finalizado'
+  tarefaUrlListar = 'http://209.126.10.114:3803/tarefas/listar'
+  tarefaUrlDeletar = 'http://209.126.10.114:3803/tarefas/deletar'
+  tarefaUrlMudarSituacao = 'http://209.126.10.114:3803/tarefas/finalizado'
 
 
   constructor(private http: HttpClient) {
